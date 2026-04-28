@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>geopower — Jeotermal Santraller için Yazılım | enerji.info</title>
+<meta name="description" content="geopower: jeotermal santraller için termodinamik, eksergi ve türbin analiz yazılımı.">
+<!-- Open Graph / Sosyal paylaşım -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="enerji.info">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://enerjiinfoweb.vercel.app/geopower">
+<meta property="og:title" content="geopower — Jeotermal Santraller için Yazılım">
+<meta property="og:description" content="Termodinamik motor, eksergi analizi ve jeotermal saha simülatörü.">
+<meta property="og:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="geopower — Jeotermal Santraller için Yazılım">
+<meta name="twitter:description" content="Termodinamik motor, eksergi analizi ve jeotermal saha simülatörü.">
+<meta name="twitter:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<link rel="canonical" href="https://enerjiinfoweb.vercel.app/geopower">
+<link rel="icon" href="enerji.infologo.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="enerji.infologo.png" alt="enerji.info">
+      <span class="brand-text">enerji<span>.info</span></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Menü">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="about.html">Hakkımızda</a></li>
+      <li><a href="products.html">Ürünler</a></li>
+      <li><a href="contact.html">İletişim</a></li>
+    </ul>
+    <a href="https://powersuite-zeta.vercel.app/login" class="cta-btn ghost" style="margin-right:8px;">Giriş Yap</a>
+    <a href="contact.html" class="cta-btn">Demo Talep Et</a>
+  </div>
+</header>
+
+<section class="page-hero" style="background: linear-gradient(135deg, #c0392b, #e74c3c);">
+  <h1>geopower</h1>
+  <p>Jeotermal santraller için eksergi, verim ve türbin analiz yazılımı.</p>
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> / <a href="products.html">Ürünler</a> / geopower</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Genel Bakış</h2>
+      <p>geopower, jeotermal kaynakların değerlendirilmesi, santral tasarımının doğrulanması ve işletmedeki verim kayıplarının tespiti için tasarlanmıştır. Saf TypeScript altyapısı ile hiç dış bağımlılık olmadan çalışır.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🌋</div>
+        <h3>Kaynak Analizi</h3>
+        <p>Rezervuar sıcaklık, basınç ve debi değerleri ile kaynağın eksergi içeriğini hesaplayın.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">♨️</div>
+        <h3>Santral Verimi</h3>
+        <p>Flash, binary ve kombine çevrimlerde verim formülleri — kayıp kaynaklarını görün.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔧</div>
+        <h3>Türbin Motoru</h3>
+        <p>İzentropik verim hesabı ve Willans line fit — saha verisi ile değerlendirme.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Modül Mimarisi</h2>
+      <p>geopower, TypeScript ile yazılmış saf hesap motorlarından oluşur.</p>
+    </div>
+    <table class="module-table">
+      <thead>
+        <tr>
+          <th>Modül</th>
+          <th>Konum</th>
+          <th>Ne işe yarar</th>
+          <th>Dış bağımlılık</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Termodinamik Motor</strong></td>
+          <td><code>src/calc/steam.ts</code>, <code>exergy.ts</code>, <code>efficiency.ts</code></td>
+          <td>IAPWS-IF97 doyma denklemleri, h/s tabloları, eksergi, santral verim formülleri</td>
+          <td>Yok (pure TS)</td>
+        </tr>
+        <tr>
+          <td><strong>Türbin Motoru</strong></td>
+          <td><code>src/calc/turbine.ts</code></td>
+          <td>İzentropik verim, Willans line fit/değerlendirme</td>
+          <td>Yalnız <code>steam.ts</code></td>
+        </tr>
+        <tr>
+          <td><strong>Jeotermal Simülatörü</strong></td>
+          <td><code>src/simulation/plant-simulator.ts</code></td>
+          <td>Gerçekçi saha verisi üretimi (demo/test için)</td>
+          <td>Connector arayüzü</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Neden geopower?</h2>
+      <p>Jeotermal santrallerin özgün ihtiyaçlarına fiziksel olarak doğru yanıtlar.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-icon">📐</div>
+        <h3>Fiziksel Doğruluk</h3>
+        <p>Doyma denklemleri, entalpi ve entropi değerleri IAPWS-IF97 standardına uygun. Her hesap uluslararası kabul görmüş eşitliklerle yapılır.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧬</div>
+        <h3>Eksergi Analizi</h3>
+        <p>Birinci yasa değil, ikinci yasa — tesisteki gerçek iyileştirme potansiyelini görmek için eksergi yıkım analizleri.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔌</div>
+        <h3>Connector Arayüzü</h3>
+        <p>SCADA, OPC, CSV veya REST kaynaklarından veri alımı — entegrasyon için hazır arayüzler.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧪</div>
+        <h3>Simülatör</h3>
+        <p>Gerçek santral verisi henüz yokken demo ve test amaçlı gerçekçi saha verisi üretebilen simülatör.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-primary">
+  <div class="container" style="text-align: center;">
+    <div class="section-header">
+      <h2>geopower'ı Tesisinizde Keşfedin</h2>
+      <p>Jeotermal sahanız için özel bir değerlendirme çalışması planlayalım.</p>
+    </div>
+    <a href="contact.html" class="cta-btn large" style="background:#f39c12;">Demo Talep Et</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="enerji.infologo.png" alt="enerji.info logo">
+      <div class="brand-text">enerji<span style="color:#f39c12;">.info</span></div>
+      <p>Enerji tesisleri için modüler, ölçeklenebilir ve sektöre özel yazılım çözümleri.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ürünler</h5>
+      <ul>
+        <li><a href="coalpower.html">coalpower</a></li>
+        <li><a href="geopower.html">geopower</a></li>
+        <li><a href="biopower.html">biopower</a></li>
+        <li><a href="solarpower.html">solarpower</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Keşfet</h5>
+      <ul>
+        <li><a href="about.html">Hakkımızda</a></li>
+          </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul>
+        <li><a href="mailto:info@enerji.info">info@enerji.info</a></li>
+        <li><a href="contact.html">Demo Talep Et</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 enerji.info — Tüm hakları saklıdır.</div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<!-- Vercel Web Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

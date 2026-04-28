@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>biopower — Biyokütle Santralleri için Yazılım | enerji.info</title>
+<meta name="description" content="biopower: biyokütle ve biyogaz santralleri için Rankine, kül kimyası, BMP, tarife ve Monte Carlo modülleri.">
+<!-- Open Graph / Sosyal paylaşım -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="enerji.info">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://enerjiinfoweb.vercel.app/biopower">
+<meta property="og:title" content="biopower — Biyokütle Santralleri için Yazılım">
+<meta property="og:description" content="Rankine, kül kimyası, BMP, YEKDEM/FiT ve Monte Carlo modülleri.">
+<meta property="og:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="biopower — Biyokütle Santralleri için Yazılım">
+<meta name="twitter:description" content="Rankine, kül kimyası, BMP, YEKDEM/FiT ve Monte Carlo modülleri.">
+<meta name="twitter:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<link rel="canonical" href="https://enerjiinfoweb.vercel.app/biopower">
+<link rel="icon" href="enerji.infologo.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="enerji.infologo.png" alt="enerji.info">
+      <span class="brand-text">enerji<span>.info</span></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Menü">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="about.html">Hakkımızda</a></li>
+      <li><a href="products.html">Ürünler</a></li>
+      <li><a href="contact.html">İletişim</a></li>
+    </ul>
+    <a href="https://powersuite-zeta.vercel.app/login" class="cta-btn ghost" style="margin-right:8px;">Giriş Yap</a>
+    <a href="contact.html" class="cta-btn">Demo Talep Et</a>
+  </div>
+</header>
+
+<section class="page-hero" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+  <h1>biopower</h1>
+  <p>Biyokütle ve biyogaz santralleri için kapsamlı analiz, fizibilite ve tarife motoru.</p>
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> / <a href="products.html">Ürünler</a> / biopower</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Genel Bakış</h2>
+      <p>biopower, biyokütle yakıtlı Rankine çevrimli santrallerden anaerobik çürütücülere, YEKDEM gibi teşvik mekanizmalarından AB ETS gelir hesabına kadar geniş bir yelpazeyi tek bir modüler yazılımda sunar.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <h3>Yakıt Esnekliği</h3>
+        <p>10 biyokütle yakıt preset'i — odun talaşı, pirina, fındık kabuğu, buğday samanı ve fazlası.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>Finansal Modelleme</h3>
+        <p>YEKDEM, YEKA-Bio ve FiT preset'leri + AB ETS — NPV, IRR ve duyarlılık analizleri.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧪</div>
+        <h3>Kül Kimyası</h3>
+        <p>B/A, Rs, Rf, AI, Rsil, BAI indeksleri ile curuflaşma ve kirlenme risklerini öngörün.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Modül Detayları</h2>
+      <p>biopower yazılımındaki tüm modüller ve işlevleri.</p>
+    </div>
+    <table class="module-table">
+      <thead>
+        <tr>
+          <th>Modül</th>
+          <th>Ne Yapar</th>
+          <th>Standalone Kullanım</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>steam.js</strong><br><small>IAPWS-IF97 + Rankine</small></td>
+          <td><code>BP.steam.Psat_bar(T)</code>, <code>Tsat_C(P)</code>, <code>h_f_T</code>, <code>h_g_T</code>, <code>h_superheat(P,T)</code>, <code>rankineCycle(...)</code></td>
+          <td>Herhangi bir termal santral, HVAC veya kazan yazılımı</td>
+        </tr>
+        <tr>
+          <td><strong>ash.js</strong><br><small>Kül kimyası & curuflaşma</small></td>
+          <td><code>BP.ash.computeIndices(ash_oxides, fuel)</code> → B/A, Rs, Rf, AI, Rsil, BAI + sınıflandırma. 9 önayar külle birlikte.</td>
+          <td>Kömür/biyokütle yakıt analiz araçları</td>
+        </tr>
+        <tr>
+          <td><strong>biogas.js</strong><br><small>BMP & anaerobik çürütücü</small></td>
+          <td><code>theoreticalBMP(C,H,O,N)</code> Boyle/Buswell; <code>sizeDigester(...)</code> HRT/OLR boyutlandırma. 10 feedstock preset, CHP motor entegrasyonu.</td>
+          <td>Biyogaz tesisi fizibilite araçları</td>
+        </tr>
+        <tr>
+          <td><strong>tariff.js</strong><br><small>Destek mekanizmaları</small></td>
+          <td><code>buildTariffSchedule(...)</code>, <code>etsRevenue(...)</code>, <code>advancedEconomics(...)</code>, <code>npvVariable</code>, <code>irrVariable</code>. YEKDEM, YEKA-Bio, FiT preset'leri + AB ETS.</td>
+          <td>Her yenilenebilir enerji projesi (güneş, rüzgâr, vs.)</td>
+        </tr>
+        <tr>
+          <td><strong>sankey.js</strong><br><small>Pure SVG Sankey renderer</small></td>
+          <td><code>renderSankey(container, {nodes, links})</code> — d3 yok, dış bağımlılık yok</td>
+          <td>Herhangi bir akış (enerji, para, süreç) görselleştirmesi</td>
+        </tr>
+        <tr>
+          <td><strong>i18n.js</strong><br><small>Hafif çeviri katmanı</small></td>
+          <td><code>data-i18n="key"</code> HTML öznitelikleri + <code>setLang()</code>, <code>apply()</code>, <code>t(key)</code></td>
+          <td>Framework bağımsız, her projeye entegre</td>
+        </tr>
+        <tr>
+          <td><strong>montecarlo.js</strong><br><small>Duyarlılık motoru</small></td>
+          <td><code>sample(dist_spec)</code>, <code>runMonteCarlo(...)</code>, <code>runTornado(...)</code>. Normal/Triangular/Uniform/Lognormal.</td>
+          <td>Her parametrik model — <code>runFullAnalysis</code> pipeline'ınıza bağlanır</td>
+        </tr>
+        <tr>
+          <td><strong>fuels.js</strong><br><small>10 biyokütle yakıt preset</small></td>
+          <td>Saf veri — yakıt özellikleri, elementel analiz, kül içeriği</td>
+          <td>Herhangi bir yakıt kütüphanesine import</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Uygulama Alanları</h2>
+      <p>biopower, biyokütle değer zincirinin her noktasında kullanılabilir.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <h3>Biyokütle Yakıtlı Santraller</h3>
+        <p>Talaş, pelet, pirina, tarımsal atık yakan buhar türbinli santraller.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌾</div>
+        <h3>Biyogaz Tesisleri</h3>
+        <p>Tarımsal atık, hayvansal gübre, gıda atığı bazlı anaerobik çürütücüler + CHP.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Fizibilite Danışmanlığı</h3>
+        <p>Yeni projeler için NPV, IRR, duyarlılık ve tarife hesapları.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-primary">
+  <div class="container" style="text-align: center;">
+    <div class="section-header">
+      <h2>biopower'ı Projenizde Deneyin</h2>
+      <p>Fizibiliteden işletmeye kadar her aşamada yanınızda.</p>
+    </div>
+    <a href="contact.html" class="cta-btn large" style="background:#f39c12;">Demo Talep Et</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="enerji.infologo.png" alt="enerji.info logo">
+      <div class="brand-text">enerji<span style="color:#f39c12;">.info</span></div>
+      <p>Enerji tesisleri için modüler, ölçeklenebilir ve sektöre özel yazılım çözümleri.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ürünler</h5>
+      <ul>
+        <li><a href="coalpower.html">coalpower</a></li>
+        <li><a href="geopower.html">geopower</a></li>
+        <li><a href="biopower.html">biopower</a></li>
+        <li><a href="solarpower.html">solarpower</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Keşfet</h5>
+      <ul>
+        <li><a href="about.html">Hakkımızda</a></li>
+          </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul>
+        <li><a href="mailto:info@enerji.info">info@enerji.info</a></li>
+        <li><a href="contact.html">Demo Talep Et</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 enerji.info — Tüm hakları saklıdır.</div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<!-- Vercel Web Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

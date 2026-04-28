@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>solarpower — Güneş Enerjisi Santralleri için Yazılım | enerji.info</title>
+<meta name="description" content="solarpower: güneş enerjisi santralleri için performans, arıza tespiti, batarya ve tahmin modülleri. IEC 61724 PR, RTE, SoH, NOAA tabanlı üretim tahmini.">
+<!-- Open Graph / Sosyal paylaşım -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="enerji.info">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://enerjiinfoweb.vercel.app/solarpower">
+<meta property="og:title" content="solarpower — Güneş Enerjisi Santralleri için Yazılım">
+<meta property="og:description" content="PR, CUF, arıza tespiti, batarya ve NOAA tabanlı üretim tahmini.">
+<meta property="og:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="solarpower — Güneş Enerjisi Santralleri için Yazılım">
+<meta name="twitter:description" content="PR, CUF, arıza tespiti, batarya ve NOAA tabanlı üretim tahmini.">
+<meta name="twitter:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<link rel="canonical" href="https://enerjiinfoweb.vercel.app/solarpower">
+<link rel="icon" href="enerji.infologo.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="enerji.infologo.png" alt="enerji.info">
+      <span class="brand-text">enerji<span>.info</span></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Menü">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="about.html">Hakkımızda</a></li>
+      <li><a href="products.html">Ürünler</a></li>
+      <li><a href="contact.html">İletişim</a></li>
+    </ul>
+    <a href="https://powersuite-zeta.vercel.app/login" class="cta-btn ghost" style="margin-right:8px;">Giriş Yap</a>
+    <a href="contact.html" class="cta-btn">Demo Talep Et</a>
+  </div>
+</header>
+
+<section class="page-hero" style="background: linear-gradient(135deg, #e67e22, #f39c12);">
+  <h1>solarpower</h1>
+  <p>Güneş enerjisi santralleri için performans, arıza tespiti, batarya ve üretim tahmini modülleri.</p>
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> / <a href="products.html">Ürünler</a> / solarpower</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Genel Bakış</h2>
+      <p>solarpower, fotovoltaik santrallerin günlük performansını IEC 61724 standardına göre ölçer, string seviyesinde arızaları erken tespit eder, batarya sağlığını takip eder ve ertesi gün için saatlik üretim tahmini üretir.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">☀️</div>
+        <h3>Performans Analizi</h3>
+        <p>IEC 61724 PR, sıcaklık düzeltilmiş PR, Specific Yield, CUF — standart KPI'larla karşılaştırılabilir performans.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔎</div>
+        <h3>Arıza Tespiti</h3>
+        <p>String akran karşılaştırması, inverter trip, clipping, soiling, iletişim kaybı — 7 farklı arıza sinyali.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔋</div>
+        <h3>Batarya Takibi</h3>
+        <p>Round-Trip Efficiency, Equivalent Full Cycles, SoH tahmini, DoD olay tespiti — lityum-iyon sistemler için.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Modül Detayları</h2>
+      <p>solarpower yazılımındaki tüm hesaplama modülleri ve işlevleri.</p>
+    </div>
+    <table class="module-table">
+      <thead>
+        <tr>
+          <th>Modül</th>
+          <th>Konum</th>
+          <th>Ne Yapar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Performans</strong></td>
+          <td><code>src/lib/analytics/performance.ts</code></td>
+          <td>
+            Enerji üretimi (trapezoidal entegrasyon), zirve güç, düzlem ışınımı (POA),
+            Specific Yield, <strong>IEC 61724 PR</strong>: <code>PR = E_ac / (H_poa × P_kwp / G_stc)</code>,
+            sıcaklık düzeltilmiş PR: <code>PR_corr = PR / (1 + γ·(T_avg − 25))</code> (γ = −0.35 %/°C),
+            Capacity Utilization Factor (CUF)
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Arıza Tespiti</strong></td>
+          <td><code>src/lib/analytics/faults.ts</code></td>
+          <td>
+            String akran karşılaştırması (medyandan ≥%15 sapma), sıfır çıkış tespiti,
+            inverter trip (ışınım &gt; 200 W/m² iken AC güç ≈ 0), clipping (zamanın &gt;%5'inde tavan %98),
+            düşük PR (7 günlük &lt; %70), soiling (7g vs 30g baseline fark &gt;%5), iletişim kaybı (&gt; 30 dk)
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Batarya</strong></td>
+          <td><code>src/lib/analytics/battery.ts</code></td>
+          <td>
+            Şarj/deşarj enerjisi (işaretli integrasyon), <strong>Round-Trip Efficiency</strong>
+            <code>RTE = discharged / charged × 100</code>, Equivalent Full Cycles
+            <code>EFC = (şarj + deşarj) / (2 × kullanılabilir kapasite)</code>, SoC istatistikleri (min/max/avg),
+            DoD olay tespiti, C-rate (şarj/deşarj ayrı), SoH tahmini
+            <code>(kullanılabilir/nominal)×100 − 0.02·EFC</code>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Tahmin</strong></td>
+          <td><code>src/lib/analytics/forecast.ts</code></td>
+          <td>
+            NOAA güneş geometrisi (deklinasyon, hour angle, zenith, azimut),
+            <strong>Haurwitz clear-sky GHI</strong>: <code>1098 × cos(θ_z) × exp(−0.057/cos(θ_z))</code>,
+            Liu-Jordan sadeleştirilmiş tilt düzeltmesi (POA), son 7 günden derate faktörü (0.3–1.05 clamp),
+            saatlik üretim tahmini: <code>POA × DC_kWp × derate</code>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Simülatör</strong></td>
+          <td><code>src/lib/simulator.ts</code></td>
+          <td>
+            Güneş geometrisinden POA üretimi, bulut faktörü (clear/mixed/cloudy) + ±%12 rastgele dalgalanma,
+            ambient + modül sıcaklığı (NOCT yaklaşımı), sıcaklık kaybı (γ·ΔT) + soiling + inverter verimi,
+            AC clipping, arıza enjeksiyonu (string/inverter trip), batarya self-consumption stratejisi,
+            mulberry32 seed'li tekrar üretilebilir RNG
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Kimler için?</h2>
+      <p>solarpower, MW ölçeğinden rooftop tesislere kadar PV değer zincirinde kullanılabilir.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🏭</div>
+        <h3>Büyük Ölçekli GES'ler</h3>
+        <p>Lisanslı santraller, YEKA güneş sahaları — IEC 61724 PR raporlaması ve string seviyesinde arıza takibi.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏢</div>
+        <h3>Çatı ve Öz Tüketim</h3>
+        <p>Ticari/endüstriyel çatı uygulamaları, bataryalı self-consumption sistemleri — günlük performans ve faydalı kullanım oranı.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>O&amp;M ve Asset Management</h3>
+        <p>Çoklu saha portföyünde erken uyarı sistemi, soiling ve degradasyon trend analizi, tahmin-gerçek karşılaştırması.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-primary">
+  <div class="container" style="text-align: center;">
+    <div class="section-header">
+      <h2>solarpower'ı Sahanızda Görün</h2>
+      <p>Saatlik üretim verisi varsa aynı gün ilk PR ve arıza raporunu teslim edebiliriz.</p>
+    </div>
+    <a href="contact.html" class="cta-btn large" style="background:#f39c12;">Demo Talep Et</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="enerji.infologo.png" alt="enerji.info logo">
+      <div class="brand-text">enerji<span style="color:#f39c12;">.info</span></div>
+      <p>Enerji tesisleri için modüler, ölçeklenebilir ve sektöre özel yazılım çözümleri.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ürünler</h5>
+      <ul>
+        <li><a href="coalpower.html">coalpower</a></li>
+        <li><a href="geopower.html">geopower</a></li>
+        <li><a href="biopower.html">biopower</a></li>
+        <li><a href="solarpower.html">solarpower</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Keşfet</h5>
+      <ul>
+        <li><a href="about.html">Hakkımızda</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul>
+        <li><a href="mailto:info@enerji.info">info@enerji.info</a></li>
+        <li><a href="contact.html">Demo Talep Et</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 enerji.info — Tüm hakları saklıdır.</div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<!-- Vercel Web Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

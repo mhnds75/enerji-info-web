@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İletişim — enerji.info</title>
+<meta name="description" content="enerji.info ile iletişime geçin — demo talep edin veya sorularınızı iletin.">
+<!-- Open Graph / Sosyal paylaşım -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="enerji.info">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://enerjiinfoweb.vercel.app/contact">
+<meta property="og:title" content="İletişim — enerji.info">
+<meta property="og:description" content="Demo talep edin, tesisinize özel modül kombinasyonunu birlikte belirleyelim.">
+<meta property="og:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="İletişim — enerji.info">
+<meta name="twitter:description" content="Demo talep edin, tesisinize özel modül kombinasyonunu birlikte belirleyelim.">
+<meta name="twitter:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<link rel="canonical" href="https://enerjiinfoweb.vercel.app/contact">
+<link rel="icon" href="enerji.infologo.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="enerji.infologo.png" alt="enerji.info">
+      <span class="brand-text">enerji<span>.info</span></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Menü">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="about.html">Hakkımızda</a></li>
+      <li><a href="products.html">Ürünler</a></li>
+      <li><a href="contact.html">İletişim</a></li>
+    </ul>
+    <a href="https://powersuite-zeta.vercel.app/login" class="cta-btn ghost" style="margin-right:8px;">Giriş Yap</a>
+    <a href="contact.html" class="cta-btn">Demo Talep Et</a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>İletişim</h1>
+  <p>Tesisinizi ve ihtiyacınızı bize anlatın — size en uygun modül kombinasyonunu birlikte belirleyelim.</p>
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> / İletişim</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="contact-wrapper">
+
+      <div class="contact-info">
+        <h3>Bize Ulaşın</h3>
+        <div class="info-item">
+          <strong>E-posta</strong>
+          <a href="mailto:info@enerji.info">info@enerji.info</a>
+        </div>
+        <div class="info-item">
+          <strong>Demo & Destek</strong>
+          <a href="mailto:demo@enerji.info">demo@enerji.info</a>
+        </div>
+        <div class="info-item">
+          <strong>Çalışma Saatleri</strong>
+          <span>Pazartesi – Cuma, 09:00 – 18:00</span>
+        </div>
+        <div class="info-item">
+          <strong>Yanıt Süresi</strong>
+          <span>1 iş günü içinde</span>
+        </div>
+
+        <div style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border);">
+          <h3 style="font-size: 18px;">Neler sunuyoruz?</h3>
+          <ul style="margin-top: 12px; padding-left: 20px; color: var(--text-muted); font-size: 14px;">
+            <li>Tesisinize özel modül kombinasyonu</li>
+            <li>Ücretsiz fizibilite değerlendirmesi</li>
+            <li>Pilot uygulama ve eğitim desteği</li>
+            <li>Özelleştirme ve entegrasyon hizmeti</li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-success" id="formSuccess">
+          ✓ Mesajınız alındı. En kısa sürede dönüş yapacağız.
+        </div>
+        <div class="form-success" id="formError" style="background:#fdecea;border-color:#c0392b;color:#922b21;display:none;"></div>
+        <!-- Honeypot — botlar için gizli alan. İnsanlar görmez. -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-10000px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Ad Soyad *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-posta *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company">Şirket / Kurum</label>
+            <input type="text" id="company" name="company">
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="interest">İlgilendiğiniz Ürün</label>
+          <select id="interest" name="interest">
+            <option value="">Seçiniz...</option>
+            <option value="coalpower">coalpower — Kömürlü termik santraller</option>
+            <option value="geopower">geopower — Jeotermal santraller</option>
+            <option value="biopower">biopower — Biyokütle santralleri</option>
+            <option value="solarpower">solarpower — Güneş enerjisi santralleri</option>
+            <option value="industrial">Endüstriyel tesis uygulaması</option>
+            <option value="other">Diğer / Emin değilim</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="plantType">Tesis Tipi</label>
+          <input type="text" id="plantType" name="plantType" placeholder="Örn. 330 MW kömürlü, 30 MW jeotermal, 10 MW biyokütle, 5 MW güneş">
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mesajınız *</label>
+          <textarea id="message" name="message" required placeholder="İhtiyaçlarınızı, mevcut problemleri ve beklentilerinizi kısaca anlatın..."></textarea>
+        </div>
+
+        <button type="submit" class="cta-btn large" style="width: 100%;">Mesajı Gönder</button>
+
+        <p class="form-note">
+          Form gönderildiğinde bilgileriniz yalnızca iletişim amacıyla kullanılır.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Sıkça Sorulanlar</h2>
+      <p>İletişim öncesi aklınıza gelebilecek birkaç temel soru.</p>
+    </div>
+    <div class="grid-2">
+      <div class="card white">
+        <h3>Demo nasıl çalışır?</h3>
+        <p>Tesisinizin tipi ve büyüklüğüne göre örnek verilerle modülleri kendi ekranınızda canlı olarak gösteriyoruz. Online görüşme 30-45 dakika sürer.</p>
+      </div>
+      <div class="card white">
+        <h3>Veri güvenliği nasıl sağlanır?</h3>
+        <p>Modüllerimiz yerel (on-premise) veya kapalı ağ kurulumuna uygundur. İstemediğiniz takdirde hiçbir veri dışarı çıkmaz.</p>
+      </div>
+      <div class="card white">
+        <h3>Kurulum ne kadar sürer?</h3>
+        <p>Mevcut veri kaynaklarının formatına bağlı olarak genellikle 2-6 hafta içinde pilot kullanıma hazır oluyoruz.</p>
+      </div>
+      <div class="card white">
+        <h3>Hangi sistemlerle entegre olabilir?</h3>
+        <p>CSV, OPC-UA, REST API, SQL/NoSQL veritabanları, InfluxDB/TimescaleDB gibi kaynaklar desteklenir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="enerji.infologo.png" alt="enerji.info logo">
+      <div class="brand-text">enerji<span style="color:#f39c12;">.info</span></div>
+      <p>Enerji tesisleri için modüler, ölçeklenebilir ve sektöre özel yazılım çözümleri.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ürünler</h5>
+      <ul>
+        <li><a href="coalpower.html">coalpower</a></li>
+        <li><a href="geopower.html">geopower</a></li>
+        <li><a href="biopower.html">biopower</a></li>
+        <li><a href="solarpower.html">solarpower</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Keşfet</h5>
+      <ul>
+        <li><a href="about.html">Hakkımızda</a></li>
+          </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul>
+        <li><a href="mailto:info@enerji.info">info@enerji.info</a></li>
+        <li><a href="contact.html">Demo Talep Et</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 enerji.info — Tüm hakları saklıdır.</div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<script>
+// Gerçek backend — /api/contact endpoint'ine POST eder.
+// Vercel Dashboard → Settings → Environment Variables altında
+// RESEND_API_KEY, CONTACT_TO ve CONTACT_FROM tanımlanmalı.
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = this;
+  const success = document.getElementById('formSuccess');
+  const errorBox = document.getElementById('formError');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  success.style.display = 'none';
+  errorBox.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Gönderiliyor...';
+
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json().catch(() => ({ ok: res.ok }));
+
+    if (res.ok && result.ok) {
+      success.style.display = 'block';
+      form.reset();
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { success.style.display = 'none'; }, 10000);
+    } else {
+      errorBox.textContent = '⚠ ' + (result.error || 'Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.');
+      errorBox.style.display = 'block';
+      errorBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  } catch (err) {
+    errorBox.textContent = '⚠ Bağlantı hatası. Lütfen internet bağlantınızı kontrol edin.';
+    errorBox.style.display = 'block';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Mesajı Gönder';
+  }
+});
+</script>
+<!-- Vercel Web Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

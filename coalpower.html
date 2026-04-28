@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>coalpower — Kömürlü Termik Santraller için Yazılım | enerji.info</title>
+<meta name="description" content="coalpower: kömürlü termik santraller için modüler analiz ve raporlama yazılımı. IAPWS-IF97 buhar tabloları, kazan verimi, türbin analizi, emisyon takibi.">
+<!-- Open Graph / Sosyal paylaşım -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="enerji.info">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://enerjiinfoweb.vercel.app/coalpower">
+<meta property="og:title" content="coalpower — Kömürlü Termik Santraller için Yazılım">
+<meta property="og:description" content="Kazan verimi, türbin analizi, emisyon takibi ve profesyonel raporlama.">
+<meta property="og:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="coalpower — Kömürlü Termik Santraller için Yazılım">
+<meta name="twitter:description" content="Kazan verimi, türbin analizi, emisyon takibi ve profesyonel raporlama.">
+<meta name="twitter:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<link rel="canonical" href="https://enerjiinfoweb.vercel.app/coalpower">
+<link rel="icon" href="enerji.infologo.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="enerji.infologo.png" alt="enerji.info">
+      <span class="brand-text">enerji<span>.info</span></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Menü">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="about.html">Hakkımızda</a></li>
+      <li><a href="products.html">Ürünler</a></li>
+      <li><a href="contact.html">İletişim</a></li>
+    </ul>
+    <a href="https://powersuite-zeta.vercel.app/login" class="cta-btn ghost" style="margin-right:8px;">Giriş Yap</a>
+    <a href="contact.html" class="cta-btn">Demo Talep Et</a>
+  </div>
+</header>
+
+<section class="page-hero" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+  <h1>coalpower</h1>
+  <p>Kömürlü termik santraller için modüler analiz, raporlama ve verim takip yazılımı.</p>
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> / <a href="products.html">Ürünler</a> / coalpower</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Genel Bakış</h2>
+      <p>coalpower, kömürlü termik santrallerin performans, ekonomik ve çevresel boyutlarını tek bir platformda birleştirir. Mühendisler sahada doğrudan kullanabilir; yöneticiler A4 formatında yazıcı-optimize raporlar alabilir.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🔥</div>
+        <h3>Kazan Performansı</h3>
+        <p>Indirect ve Direct yöntemlerle 6 kayıp bileşenli kazan verimi hesabı, NCV ölçekleme, stokiyometrik kontroller.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Türbin Analizi</h3>
+        <p>HP/IP kasa izentropik verim, akış dengesi, ST_Q ve GRHR hesapları — her buhar türbinine uygulanabilir.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <h3>Profesyonel Rapor</h3>
+        <p>6 sayfalık A4 raporu, @media print optimizasyonu — SCADA ekstrelerine alternatif.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>Modül Detayları</h2>
+      <p>coalpower yazılımını oluşturan tüm modüller ve görevleri.</p>
+    </div>
+    <table class="module-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Modül</th>
+          <th>Dosya</th>
+          <th>Ne Yapar</th>
+          <th>Kullanım</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>IAPWS-IF97 Buhar Tabloları</strong></td>
+          <td><code>steam.js</code></td>
+          <td>enthalpy(p,T), entropy(p,T), isentropicEnthalpy — 34+43 katsayılı tam uygulama</td>
+          <td>Her türlü kazan/türbin hesabı</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>Kazan Verimi</strong></td>
+          <td><code>calculations.js</code></td>
+          <td>6 kayıp bileşenli kazan verimi, NCV ölçekleme, stokiyometri (Indirect/Direct)</td>
+          <td>Herhangi bir kömür kazanı</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>Türbin İzentropik Analiz</strong></td>
+          <td><code>calculations.js</code></td>
+          <td>HP/IP kasa η, akış dengesi, ST_Q, GRHR</td>
+          <td>Her buhar türbin</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>Kömür NCV Hesaplayıcı</strong></td>
+          <td><code>calculations.js</code></td>
+          <td>Dulong: HHV = 337C + 1419(H-O/8) + 93S → LHV</td>
+          <td>Kömür karakterizasyonu</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>Ekonomik + Emisyon</strong></td>
+          <td><code>computeEconomics</code></td>
+          <td>TL/MWh, CO₂/SO₂/NOx/toz — g/kWh ve ton/yıl</td>
+          <td>Santral ekonomisi</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><strong>Sankey Diyagramı</strong></td>
+          <td><code>views/flow.ejs</code></td>
+          <td>Enerji akışı SVG — node + flow, renkli</td>
+          <td>Akış görselleştirme</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><strong>Line Chart (Trendler)</strong></td>
+          <td><code>views/trends.ejs</code></td>
+          <td>Zaman serisi SVG, 9 KPI</td>
+          <td>Trend izleme</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><strong>Gauge + Pie + Sigma-Bar</strong></td>
+          <td><code>views/summary.ejs</code></td>
+          <td>KPI kartları, donut, % gösterici</td>
+          <td>Özet panel</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><strong>Print-Optimize Rapor</strong></td>
+          <td><code>views/report.ejs</code></td>
+          <td>A4, 6 sayfalık, @media print</td>
+          <td>Yönetim raporu</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Kimler için uygun?</h2>
+      <p>coalpower, kömür yakan tüm enerji tesislerinde ve benzeri buhar çevrimlerinde çalışır.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🏭</div>
+        <h3>Kömürlü Termik Santraller</h3>
+        <p>Linyit, taş kömürü, antrasit yakan subkritik, süperkritik ve ultra-süperkritik üniteler.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏗️</div>
+        <h3>Endüstriyel Kazanlar</h3>
+        <p>Demir-çelik, çimento, kağıt fabrikalarındaki buhar ve sıcak su kazanları.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">♻️</div>
+        <h3>Kojenerasyon Tesisleri</h3>
+        <p>Buhar+elektrik üreten kombine ısı-güç tesisleri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-primary">
+  <div class="container" style="text-align: center;">
+    <div class="section-header">
+      <h2>coalpower'ı Kendi Tesisinizde Görün</h2>
+      <p>Demo talep edin, tesisinize özel bir değerlendirme çalışması yapalım.</p>
+    </div>
+    <a href="contact.html" class="cta-btn large" style="background:#f39c12;">Demo Talep Et</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="enerji.infologo.png" alt="enerji.info logo">
+      <div class="brand-text">enerji<span style="color:#f39c12;">.info</span></div>
+      <p>Enerji tesisleri için modüler, ölçeklenebilir ve sektöre özel yazılım çözümleri.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ürünler</h5>
+      <ul>
+        <li><a href="coalpower.html">coalpower</a></li>
+        <li><a href="geopower.html">geopower</a></li>
+        <li><a href="biopower.html">biopower</a></li>
+        <li><a href="solarpower.html">solarpower</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Keşfet</h5>
+      <ul>
+        <li><a href="about.html">Hakkımızda</a></li>
+          </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul>
+        <li><a href="mailto:info@enerji.info">info@enerji.info</a></li>
+        <li><a href="contact.html">Demo Talep Et</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 enerji.info — Tüm hakları saklıdır.</div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<!-- Vercel Web Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>
