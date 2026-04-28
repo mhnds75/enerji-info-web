@@ -53,23 +53,23 @@
   <div class="container">
     <div class="section-header">
       <h2>Genel Bakış</h2>
-      <p>solarpower, fotovoltaik santrallerin günlük performansını IEC 61724 standardına göre ölçer, string seviyesinde arızaları erken tespit eder, batarya sağlığını takip eder ve ertesi gün için saatlik üretim tahmini üretir.</p>
+      <p>solarpower, fotovoltaik santralleri TMY/PVGIS kaynak verisinden 25-yıl bozunma profiline, sabit/tracker/bifacial konfigürasyonlardan BIPV/FPV/Agri-PV/off-grid varyantlarına kadar 24 sekme + <strong>80 özellikli</strong> en kapsamlı modül.</p>
     </div>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">☀️</div>
-        <h3>Performans Analizi</h3>
-        <p>IEC 61724 PR, sıcaklık düzeltilmiş PR, Specific Yield, CUF — standart KPI'larla karşılaştırılabilir performans.</p>
+        <h3>TMY + SAPM Modeli</h3>
+        <p>TMY/PVGIS saatlik kaynak, Sandia Array Performance Model (SAPM) + tek-diot modeli, IEC 61724 Tier 1/2/3 uygunluk.</p>
       </div>
       <div class="card">
-        <div class="card-icon">🔎</div>
-        <h3>Arıza Tespiti</h3>
-        <p>String akran karşılaştırması, inverter trip, clipping, soiling, iletişim kaybı — 7 farklı arıza sinyali.</p>
+        <div class="card-icon">🔄</div>
+        <h3>Tracker + Bifacial</h3>
+        <p>Single-axis backtracking (GCR optimizasyonu), bifacial arka ışıma (albedo 0.2-1.0), 80+ konfigürasyon.</p>
       </div>
       <div class="card">
-        <div class="card-icon">🔋</div>
-        <h3>Batarya Takibi</h3>
-        <p>Round-Trip Efficiency, Equivalent Full Cycles, SoH tahmini, DoD olay tespiti — lityum-iyon sistemler için.</p>
+        <div class="card-icon">🔌</div>
+        <h3>Hibrit + Grid + Off-grid</h3>
+        <p>BESS arbitraj, P2H elektroliz, anti-islanding, Q@Night, GFM, Volt-VAR, BIPV/FPV/Agri-PV varyantları.</p>
       </div>
     </div>
   </div>
@@ -78,70 +78,41 @@
 <section class="bg-soft">
   <div class="container">
     <div class="section-header">
-      <h2>Modül Detayları</h2>
-      <p>solarpower yazılımındaki tüm hesaplama modülleri ve işlevleri.</p>
+      <h2>24 Modül Sekmesi</h2>
+      <p>solarpower yazılımındaki tüm sekmeler ve kapsamı.</p>
     </div>
     <table class="module-table">
       <thead>
-        <tr>
-          <th>Modül</th>
-          <th>Konum</th>
-          <th>Ne Yapar</th>
-        </tr>
+        <tr><th>#</th><th>Sekme</th><th>Kapsam</th><th>Standart / Yöntem</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>Performans</strong></td>
-          <td><code>src/lib/analytics/performance.ts</code></td>
-          <td>
-            Enerji üretimi (trapezoidal entegrasyon), zirve güç, düzlem ışınımı (POA),
-            Specific Yield, <strong>IEC 61724 PR</strong>: <code>PR = E_ac / (H_poa × P_kwp / G_stc)</code>,
-            sıcaklık düzeltilmiş PR: <code>PR_corr = PR / (1 + γ·(T_avg − 25))</code> (γ = −0.35 %/°C),
-            Capacity Utilization Factor (CUF)
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Arıza Tespiti</strong></td>
-          <td><code>src/lib/analytics/faults.ts</code></td>
-          <td>
-            String akran karşılaştırması (medyandan ≥%15 sapma), sıfır çıkış tespiti,
-            inverter trip (ışınım &gt; 200 W/m² iken AC güç ≈ 0), clipping (zamanın &gt;%5'inde tavan %98),
-            düşük PR (7 günlük &lt; %70), soiling (7g vs 30g baseline fark &gt;%5), iletişim kaybı (&gt; 30 dk)
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Batarya</strong></td>
-          <td><code>src/lib/analytics/battery.ts</code></td>
-          <td>
-            Şarj/deşarj enerjisi (işaretli integrasyon), <strong>Round-Trip Efficiency</strong>
-            <code>RTE = discharged / charged × 100</code>, Equivalent Full Cycles
-            <code>EFC = (şarj + deşarj) / (2 × kullanılabilir kapasite)</code>, SoC istatistikleri (min/max/avg),
-            DoD olay tespiti, C-rate (şarj/deşarj ayrı), SoH tahmini
-            <code>(kullanılabilir/nominal)×100 − 0.02·EFC</code>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Tahmin</strong></td>
-          <td><code>src/lib/analytics/forecast.ts</code></td>
-          <td>
-            NOAA güneş geometrisi (deklinasyon, hour angle, zenith, azimut),
-            <strong>Haurwitz clear-sky GHI</strong>: <code>1098 × cos(θ_z) × exp(−0.057/cos(θ_z))</code>,
-            Liu-Jordan sadeleştirilmiş tilt düzeltmesi (POA), son 7 günden derate faktörü (0.3–1.05 clamp),
-            saatlik üretim tahmini: <code>POA × DC_kWp × derate</code>
-          </td>
-        </tr>
-        <tr>
-          <td><strong>Simülatör</strong></td>
-          <td><code>src/lib/simulator.ts</code></td>
-          <td>
-            Güneş geometrisinden POA üretimi, bulut faktörü (clear/mixed/cloudy) + ±%12 rastgele dalgalanma,
-            ambient + modül sıcaklığı (NOCT yaklaşımı), sıcaklık kaybı (γ·ΔT) + soiling + inverter verimi,
-            AC clipping, arıza enjeksiyonu (string/inverter trip), batarya self-consumption stratejisi,
-            mulberry32 seed'li tekrar üretilebilir RNG
-          </td>
-        </tr>
+        <tr><td>1</td><td><strong>Tesis Tipi</strong></td><td>Sabit / 1-eks / 2-eks tracker, bifacial, FPV / agri-PV / BIPV</td><td>Plant config bayrakları</td></tr>
+        <tr><td>2</td><td><strong>PV Modül</strong></td><td>Mono/poly/HJT, STC (Pmp, Voc, Isc), sıcaklık katsayıları</td><td>50+ preset Tier-1</td></tr>
+        <tr><td>3</td><td><strong>Inverter</strong></td><td>String/central, DC ratio, MPPT pencere, 50+ preset</td><td>EU/CEC verim</td></tr>
+        <tr><td>4</td><td><strong>Kaynak (TMY/PVGIS)</strong></td><td>GHI/DNI/DHI saatlik veri, albedo, topoğrafya, parsing</td><td>TMY3 / PVGIS API</td></tr>
+        <tr><td>5</td><td><strong>Tilt / Azimuth Optim.</strong></td><td>Yıllık optim açı, azimut, mevsimsel ayar</td><td>Yıllık enerji maks.</td></tr>
+        <tr><td>6</td><td><strong>AEP & Performance Ratio</strong></td><td>Yıllık enerji, IEC 61724 PR, soiling, CUF</td><td>IEC 61724-1 Tier 1</td></tr>
+        <tr><td>7</td><td><strong>8760 Saatlik Profil</strong></td><td>Saatlik üretim, kullanılabilirlik, dispatch</td><td>SAPM saatlik</td></tr>
+        <tr><td>8</td><td><strong>Kayıplar</strong></td><td>Kablolama, trafo, ışın uyumsuzluğu, PID/LeTID, soiling</td><td>15+ kayıp bileşeni</td></tr>
+        <tr><td>9</td><td><strong>Tracking & Backtracking</strong></td><td>Single-axis backtracking, GCR optimizasyonu, satır gölgelemesi</td><td>Lorenzo backtracking</td></tr>
+        <tr><td>10</td><td><strong>Bifacial</strong></td><td>Arka taraf kazanç, ground albedo, view-factor analizi</td><td>BG (Bifacial Gain) %</td></tr>
+        <tr><td>11</td><td><strong>Bozunma (25 Yıl)</strong></td><td>1. yıl step + yıllık linear, 25 yıl kümülatif profil</td><td>PID/LeTID modeli</td></tr>
+        <tr><td>12</td><td><strong>LCOE</strong></td><td>NPV, WACC senaryoları, CapEx ($/Wp), OpEx, payback</td><td>Yatırım analizi</td></tr>
+        <tr><td>13</td><td><strong>Tarife (YEKA-GES)</strong></td><td>YEKA-GES / YEKDEM / PPA / net metering, döviz</td><td>Türk + EU mevzuat</td></tr>
+        <tr><td>14</td><td><strong>Hibrit (BESS + H₂)</strong></td><td>BESS arbitraj, P2H elektroliz, self-consumption</td><td>Lityum-iyon, alkalin elektroliz</td></tr>
+        <tr><td>15</td><td><strong>Monte Carlo</strong></td><td>CapEx, soiling, fiyat belirsizliği, P50/P90 LCOE</td><td>10,000 senaryo</td></tr>
+        <tr><td>16</td><td><strong>Özet (KPI)</strong></td><td>AEP, PR, CUF, LCOE, NPV, IRR, payback</td><td>Yönetim panosu</td></tr>
+        <tr><td>17</td><td><strong>İleri Kaynak</strong></td><td>Spektral, transposisyon (Perez/Hay), shading, horizon</td><td>Klucher / Perez modelleri</td></tr>
+        <tr><td>18</td><td><strong>Termal & PVT</strong></td><td>NOCT, modül T, anti-islanding, PVT (PV+thermal)</td><td>King thermal model</td></tr>
+        <tr><td>19</td><td><strong>Layout & Topoloji</strong></td><td>String tasarım, GCR, satır spacing, çevre topoğrafya</td><td>SAM uyumlu</td></tr>
+        <tr><td>20</td><td><strong>Operasyon & Bakım</strong></td><td>O&M maliyeti, soiling temizlik takvimi, RUL, alarm motoru</td><td>Predictive maintenance</td></tr>
+        <tr><td>21</td><td><strong>Hibrit + (Detaylı)</strong></td><td>Wind+Solar+BESS+H₂ entegre dispatch</td><td>P2X stratejileri</td></tr>
+        <tr><td>22</td><td><strong>Grid Entegrasyonu</strong></td><td>Anti-islanding, Q@Night, Volt-VAR, GFM (Grid-Forming)</td><td>EnTSO-E, IEEE 1547</td></tr>
+        <tr><td>23</td><td><strong>Çevresel & Sosyal</strong></td><td>Karbon avoid, su tasarrufu, arazi kullanımı, sosyal kabul</td><td>LCA + ESG</td></tr>
+        <tr><td>24</td><td><strong>Compliance</strong></td><td>IEC 61724 Tier 1/2/3, Tier-1 fabrika, bankability</td><td>Bankacılık + sigorta</td></tr>
       </tbody>
     </table>
+    <p style="margin-top:24px; text-align:center; font-size:14px; color:var(--text-soft);">+ Görseller, AI tahmin (Ridge/k-NN), Saha-spesifik (yamaç/su/tarım) — toplam <strong>80 özellik</strong></p>
   </div>
 </section>
 
@@ -194,6 +165,7 @@
         <li><a href="coalpower.html">coalpower</a></li>
         <li><a href="geopower.html">geopower</a></li>
         <li><a href="biopower.html">biopower</a></li>
+        <li><a href="windpower.html">windpower</a></li>
         <li><a href="solarpower.html">solarpower</a></li>
       </ul>
     </div>

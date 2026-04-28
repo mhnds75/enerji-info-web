@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>windpower — Rüzgar Santralleri için Yazılım | enerji.info</title>
+<meta name="description" content="windpower: rüzgar santralleri için modüler analiz yazılımı. Weibull AEP, Jensen wake, IEC 61400, kara/deniz/floating LCOE, BESS+H2, repowering.">
+<!-- Open Graph / Sosyal paylaşım -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="enerji.info">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:url" content="https://enerjiinfoweb.vercel.app/windpower">
+<meta property="og:title" content="windpower — Rüzgar Santralleri için Yazılım">
+<meta property="og:description" content="Weibull AEP, Jensen wake, IEC 61400, BESS+H2 hibrit, repowering ekonomisi.">
+<meta property="og:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<meta property="og:image:width" content="500">
+<meta property="og:image:height" content="500">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="windpower — Rüzgar Santralleri için Yazılım">
+<meta name="twitter:description" content="Weibull AEP, Jensen wake, IEC 61400, BESS+H2 hibrit, repowering ekonomisi.">
+<meta name="twitter:image" content="https://enerjiinfoweb.vercel.app/enerji.infologo.png">
+<link rel="canonical" href="https://enerjiinfoweb.vercel.app/windpower">
+<link rel="icon" href="enerji.infologo.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="nav">
+    <a href="index.html" class="brand">
+      <img src="enerji.infologo.png" alt="enerji.info">
+      <span class="brand-text">enerji<span>.info</span></span>
+    </a>
+    <button class="mobile-toggle" aria-label="Menü">☰</button>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="about.html">Hakkımızda</a></li>
+      <li><a href="products.html">Ürünler</a></li>
+      <li><a href="contact.html">İletişim</a></li>
+    </ul>
+    <a href="https://powersuite-zeta.vercel.app/login" class="cta-btn ghost" style="margin-right:8px;">Giriş Yap</a>
+    <a href="contact.html" class="cta-btn">Demo Talep Et</a>
+  </div>
+</header>
+
+<section class="page-hero" style="background: linear-gradient(135deg, #16a085, #1abc9c);">
+  <h1>windpower</h1>
+  <p>Rüzgar santralleri için modüler analiz, layout optimizasyonu ve hibrit ekonomi yazılımı.</p>
+  <div class="breadcrumb"><a href="index.html">Ana Sayfa</a> / <a href="products.html">Ürünler</a> / windpower</div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Genel Bakış</h2>
+      <p>windpower, kara/deniz/floating rüzgar santrallerinin kaynak değerlendirmesinden layout tasarımına, IEC 61400 uyumluluğundan repowering ekonomisine kadar 16 farklı analiz sekmesini tek platformda toplar. BESS, yeşil hidrojen ve solar hibrit konfigürasyonları desteklenir.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🌬️</div>
+        <h3>Weibull AEP</h3>
+        <p>Weibull (k, c) parametreleri, hub-yükseklik extrapolation (LogLaw / PowerLaw), 16 sektör Wind Rose ve yıllık enerji integrasyonu.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔁</div>
+        <h3>Wake & Layout</h3>
+        <p>Jensen wake modeli, lineer interpolasyon, sıra/sütun spacing, sektörel kayıp dağılımı ve farm layout optimizasyonu.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔋</div>
+        <h3>Hibrit Sistemler</h3>
+        <p>BESS arbitraj, yeşil hidrojen elektrolizi, solar+wind hibrit, repowering senaryoları ve PPA carryover analizleri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="container">
+    <div class="section-header">
+      <h2>16 Modül Sekmesi</h2>
+      <p>windpower yazılımındaki tüm sekmeler ve kapsamı.</p>
+    </div>
+    <table class="module-table">
+      <thead>
+        <tr><th>#</th><th>Sekme</th><th>Kapsam</th><th>Standart / Yöntem</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>Tesis Tipi</strong></td><td>Onshore / offshore / floating, türbin sayısı, preset turbin modeli</td><td>IEC 61400 sınıfı (1A/1B/2/3)</td></tr>
+        <tr><td>2</td><td><strong>Power Curve</strong></td><td>Türbin güç eğrisi, cut-in/rated/cut-out, hub-yükseklik düzeltmesi</td><td>IEC sınıflandırma + extrapolation</td></tr>
+        <tr><td>3</td><td><strong>Kaynak (Weibull)</strong></td><td>Weibull k, c parametreleri; mast/hub yükseklik dönüşümü</td><td>LogLaw &amp; PowerLaw</td></tr>
+        <tr><td>4</td><td><strong>AEP (Yıllık Enerji)</strong></td><td>Weibull integrali × güç eğrisi; CF (capacity factor)</td><td>Energy yield assessment</td></tr>
+        <tr><td>5</td><td><strong>Wind Rose</strong></td><td>16 sektör rüzgar yönü dağılımı, frekans ağırlıklı görsel</td><td>Saatlik ölçüm verisi</td></tr>
+        <tr><td>6</td><td><strong>Wake &amp; Layout</strong></td><td>Türbin sıralaması, Jensen lineer wake, sektörel kayıp</td><td>Jensen N.O. (1983) modeli</td></tr>
+        <tr><td>7</td><td><strong>Performans</strong></td><td>Power curve validation, MAPE, korelasyon, kayıp ağacı</td><td>IEC 61400-12 verim ölçümü</td></tr>
+        <tr><td>8</td><td><strong>Bakım &amp; Reliability</strong></td><td>Komponent yaşı, RUL (remaining useful life), MTBF, OEE</td><td>FMECA yaklaşımı</td></tr>
+        <tr><td>9</td><td><strong>Çevre Etkileri</strong></td><td>Shadow flicker (saat/yıl), ses (dB(A) konturları), kuş çarpması</td><td>WHO + ulusal limit</td></tr>
+        <tr><td>10</td><td><strong>Wind LCOE</strong></td><td>CapEx ($/kW), OpEx, NPV, IRR, geri ödeme</td><td>WACC senaryoları</td></tr>
+        <tr><td>11</td><td><strong>Tarife</strong></td><td>YEKDEM / YEKA-RES / merchant / PPA, döviz dönüşümü</td><td>Türk mevzuat + EU model</td></tr>
+        <tr><td>12</td><td><strong>Grid Entegrasyonu</strong></td><td>P-Q diyagramı, reaktif güç, frekans tepki, forecast (persistence/AR1)</td><td>EnTSO-E + grid code</td></tr>
+        <tr><td>13</td><td><strong>Hibrit (BESS + H₂ + Solar)</strong></td><td>BESS arbitraj, elektroliz CAPEX, hibrit dispatch</td><td>P2H, P2X stratejileri</td></tr>
+        <tr><td>14</td><td><strong>Repowering</strong></td><td>Eski/yeni türbin ekonomisi, foundation reuse, PPA carryover</td><td>NPV karşılaştırma</td></tr>
+        <tr><td>15</td><td><strong>Monte Carlo</strong></td><td>CapEx, CF, fiyat belirsizliği — LCOE dağılımı (P50, P90)</td><td>10,000 senaryo</td></tr>
+        <tr><td>16</td><td><strong>Özet (KPI)</strong></td><td>AEP, CF, LCOE, NPV, IRR, payback, CO₂ avoid</td><td>Yönetim panosu</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Kimler için uygun?</h2>
+      <p>windpower, kara ve deniz rüzgar santralleri ile hibrit yenilenebilir tesisler için tasarlandı.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">🌳</div>
+        <h3>Onshore RES</h3>
+        <p>Kara üzeri rüzgar santralleri — yatırım, performans takibi, repowering ve bakım planlama.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌊</div>
+        <h3>Offshore + Floating</h3>
+        <p>Sabit zeminli ve yüzer rüzgar — daha yüksek CapEx, daha yüksek CF; floating LCOE modelleri.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Hibrit Tesisler</h3>
+        <p>RES + BESS + güneş + yeşil hidrojen — entegre dispatch ve PPA optimizasyonu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-primary">
+  <div class="container" style="text-align: center;">
+    <div class="section-header">
+      <h2>windpower'ı Tesisinizde Görün</h2>
+      <p>Demo talep edin, sahanıza özel AEP + LCOE değerlendirmesi yapalım.</p>
+    </div>
+    <a href="contact.html" class="cta-btn large" style="background:#f39c12;">Demo Talep Et</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <img src="enerji.infologo.png" alt="enerji.info logo">
+      <div class="brand-text">enerji<span style="color:#f39c12;">.info</span></div>
+      <p>Enerji tesisleri için modüler, ölçeklenebilir ve sektöre özel yazılım çözümleri.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Ürünler</h5>
+      <ul>
+        <li><a href="coalpower.html">coalpower</a></li>
+        <li><a href="geopower.html">geopower</a></li>
+        <li><a href="biopower.html">biopower</a></li>
+        <li><a href="windpower.html">windpower</a></li>
+        <li><a href="solarpower.html">solarpower</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Keşfet</h5>
+      <ul>
+        <li><a href="about.html">Hakkımızda</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul>
+        <li><a href="mailto:info@enerji.info">info@enerji.info</a></li>
+        <li><a href="contact.html">Demo Talep Et</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 enerji.info — Tüm hakları saklıdır.</div>
+</footer>
+
+<script src="assets/nav.js"></script>
+<!-- Vercel Web Analytics + Speed Insights -->
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

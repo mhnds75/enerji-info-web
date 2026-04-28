@@ -53,23 +53,23 @@
   <div class="container">
     <div class="section-header">
       <h2>Genel Bakış</h2>
-      <p>geopower, jeotermal kaynakların değerlendirilmesi, santral tasarımının doğrulanması ve işletmedeki verim kayıplarının tespiti için tasarlanmıştır. Saf TypeScript altyapısı ile hiç dış bağımlılık olmadan çalışır.</p>
+      <p>geopower, jeotermal sahaların kaynak değerlendirmesinden santral tasarımına, NCG yönetiminden indüklenmiş sismisite riskine kadar 19 sekme ile flash / double-flash / binary (ORC) çevrimleri tek platformda sunar.</p>
     </div>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">🌋</div>
-        <h3>Kaynak Analizi</h3>
-        <p>Rezervuar sıcaklık, basınç ve debi değerleri ile kaynağın eksergi içeriğini hesaplayın.</p>
+        <h3>Flash + Binary (ORC)</h3>
+        <p>Single-flash, double-flash, binary (Organic Rankine Cycle) tip seçimi. Brine reinjection ve well-pad dispatch.</p>
       </div>
       <div class="card">
-        <div class="card-icon">♨️</div>
-        <h3>Santral Verimi</h3>
-        <p>Flash, binary ve kombine çevrimlerde verim formülleri — kayıp kaynaklarını görün.</p>
+        <div class="card-icon">💨</div>
+        <h3>NCG + Ejektör</h3>
+        <p>Non-Condensable Gas yönetimi (CO₂/H₂S/NH₃ partisyon, H₂S sınırı), buhar ejektörü, kondenser TTD optimizasyonu.</p>
       </div>
       <div class="card">
-        <div class="card-icon">🔧</div>
-        <h3>Türbin Motoru</h3>
-        <p>İzentropik verim hesabı ve Willans line fit — saha verisi ile değerlendirme.</p>
+        <div class="card-icon">⚠️</div>
+        <h3>SSI + LSI + TLP</h3>
+        <p>Silica Saturation Index (SSI), Langelier (LSI) reinjeksiyon uygunluğu, Traffic Light Protocol indüklenmiş sismisite risk yönetimi.</p>
       </div>
     </div>
   </div>
@@ -78,37 +78,33 @@
 <section class="bg-soft">
   <div class="container">
     <div class="section-header">
-      <h2>Modül Mimarisi</h2>
-      <p>geopower, TypeScript ile yazılmış saf hesap motorlarından oluşur.</p>
+      <h2>19 Modül Sekmesi</h2>
+      <p>geopower yazılımındaki tüm sekmeler ve kapsamı.</p>
     </div>
     <table class="module-table">
       <thead>
-        <tr>
-          <th>Modül</th>
-          <th>Konum</th>
-          <th>Ne işe yarar</th>
-          <th>Dış bağımlılık</th>
-        </tr>
+        <tr><th>#</th><th>Sekme</th><th>Kapsam</th><th>Standart / Yöntem</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>Termodinamik Motor</strong></td>
-          <td><code>src/calc/steam.ts</code>, <code>exergy.ts</code>, <code>efficiency.ts</code></td>
-          <td>IAPWS-IF97 doyma denklemleri, h/s tabloları, eksergi, santral verim formülleri</td>
-          <td>Yok (pure TS)</td>
-        </tr>
-        <tr>
-          <td><strong>Türbin Motoru</strong></td>
-          <td><code>src/calc/turbine.ts</code></td>
-          <td>İzentropik verim, Willans line fit/değerlendirme</td>
-          <td>Yalnız <code>steam.ts</code></td>
-        </tr>
-        <tr>
-          <td><strong>Jeotermal Simülatörü</strong></td>
-          <td><code>src/simulation/plant-simulator.ts</code></td>
-          <td>Gerçekçi saha verisi üretimi (demo/test için)</td>
-          <td>Connector arayüzü</td>
-        </tr>
+        <tr><td>1</td><td><strong>Tesis Tipi</strong></td><td>Flash / double-flash / binary, debi (buhar/brine), P/T, brüt/net güç</td><td>Plant config bayrakları</td></tr>
+        <tr><td>2</td><td><strong>Türbin</strong></td><td>Giriş/çıkış (P/T/kalite), izentropik verim, entalpi farkı</td><td>IAPWS-IF97 R1, R2, R4</td></tr>
+        <tr><td>3</td><td><strong>Willans Line</strong></td><td>Çoklu yük noktası → lineer regresyon (slope, R²)</td><td>Saha verisi tabanlı</td></tr>
+        <tr><td>4</td><td><strong>Eksergi</strong></td><td>Kuyu → separator → türbin → kondenser eksergi yıkım haritası</td><td>İkinci yasa analizi</td></tr>
+        <tr><td>5</td><td><strong>Flash Optim.</strong></td><td>Separator basıncı sweep, double-flash optimum noktaları</td><td>Net güç maks.</td></tr>
+        <tr><td>6</td><td><strong>NCG Yönetimi</strong></td><td>CO₂/H₂S/NH₃ partisyon, gas removal cost, H₂S emisyon sınırı</td><td>EU IED + ulusal limit</td></tr>
+        <tr><td>7</td><td><strong>Soğutma Kulesi</strong></td><td>Yaş/kuru, thermal load, Cycles of Concentration, drift</td><td>m³/MWh, makeup su</td></tr>
+        <tr><td>8</td><td><strong>Kondenser</strong></td><td>TTD (Terminal Temperature Difference), U değeri, alan boyutlandırma</td><td>Heat exchanger sizing</td></tr>
+        <tr><td>9</td><td><strong>Buhar Ejektörü</strong></td><td>Çok aşamalı ejektor, motor buhar tüketimi, NCG çıkartma</td><td>Vakum sistemleri</td></tr>
+        <tr><td>10</td><td><strong>Binary (ORC)</strong></td><td>Organic Rankine alternatif çevrim — düşük entalpi kaynaklar</td><td>İzobütan, R245fa, vs.</td></tr>
+        <tr><td>11</td><td><strong>Wellbore PI</strong></td><td>Kuyu performans indeksi, pressure drawdown, debi-basınç eğrisi</td><td>Productivity Index</td></tr>
+        <tr><td>12</td><td><strong>Rezervuar Düşüş</strong></td><td>Decline curve, basınç/debi yıllık azalma modeli</td><td>Arps modeli</td></tr>
+        <tr><td>13</td><td><strong>Silica SSI</strong></td><td>Silika doygunluk indeksi, reinjeksiyon sıcaklık limiti</td><td>SiO₂ scaling riski</td></tr>
+        <tr><td>14</td><td><strong>Langelier (LSI)</strong></td><td>CaCO₃ scaling/korozyon riski, pH dengeleme</td><td>Langelier Saturation</td></tr>
+        <tr><td>15</td><td><strong>Geokimya Takipçi</strong></td><td>İz element (B, Li, As) takibi, çevre uyumluluk</td><td>Su kalitesi izleme</td></tr>
+        <tr><td>16</td><td><strong>İndüklenmiş Sismisite (TLP)</strong></td><td>Traffic Light Protocol: yeşil/sarı/kırmızı, debi kısıtlama</td><td>USGS + AB protokolü</td></tr>
+        <tr><td>17</td><td><strong>Subsidans + Su Tüketim</strong></td><td>Yer çökmesi, brine reinjection oranı, makeup su</td><td>m³/MWh, m/yıl çökme</td></tr>
+        <tr><td>18</td><td><strong>LCOE + YEKDEM</strong></td><td>Drilling risk, CapEx ($/kW), YEKDEM jeotermal tarife</td><td>USD/TRY, ETS</td></tr>
+        <tr><td>19</td><td><strong>Görseller (T-s, Sankey)</strong></td><td>T-s diyagramı, Sankey enerji akışı, layout görseli</td><td>Pure SVG</td></tr>
       </tbody>
     </table>
   </div>
@@ -168,6 +164,7 @@
         <li><a href="coalpower.html">coalpower</a></li>
         <li><a href="geopower.html">geopower</a></li>
         <li><a href="biopower.html">biopower</a></li>
+        <li><a href="windpower.html">windpower</a></li>
         <li><a href="solarpower.html">solarpower</a></li>
       </ul>
     </div>

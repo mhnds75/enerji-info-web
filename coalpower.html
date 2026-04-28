@@ -53,23 +53,23 @@
   <div class="container">
     <div class="section-header">
       <h2>Genel Bakış</h2>
-      <p>coalpower, kömürlü termik santrallerin performans, ekonomik ve çevresel boyutlarını tek bir platformda birleştirir. Mühendisler sahada doğrudan kullanabilir; yöneticiler A4 formatında yazıcı-optimize raporlar alabilir.</p>
+      <p>coalpower, kömürlü termik santrallerin performans, ekonomik ve çevresel boyutlarını tek platformda birleştirir. IAPWS-IF97 buhar tablolarından 5 aşamalı verim zincirine, ETS+CBAM ekonomisinden Sankey enerji akışına kadar 12 sekmede sahaya yönelik analiz sunar.</p>
     </div>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">🔥</div>
-        <h3>Kazan Performansı</h3>
-        <p>Indirect ve Direct yöntemlerle 6 kayıp bileşenli kazan verimi hesabı, NCV ölçekleme, stokiyometrik kontroller.</p>
+        <h3>5 Aşama Verim Zinciri</h3>
+        <p>Q_useful (IAPWS) → Total Heat → PTC4 Losses → η_HHV/LHV → Türbin (HP/IP/LP izentropik). Plant config bayraklarına göre dinamik.</p>
       </div>
       <div class="card">
-        <div class="card-icon">⚡</div>
-        <h3>Türbin Analizi</h3>
-        <p>HP/IP kasa izentropik verim, akış dengesi, ST_Q ve GRHR hesapları — her buhar türbinine uygulanabilir.</p>
+        <div class="card-icon">📊</div>
+        <h3>ETS + CBAM Ekonomisi</h3>
+        <p>EU ETS / TR ETS / CBAM senaryoları, IPCC Tier 2 CO₂ EF, EUR/TRY döviz duyarlılığı, $/MWh karbon yükü.</p>
       </div>
       <div class="card">
-        <div class="card-icon">📄</div>
-        <h3>Profesyonel Rapor</h3>
-        <p>6 sayfalık A4 raporu, @media print optimizasyonu — SCADA ekstrelerine alternatif.</p>
+        <div class="card-icon">🔍</div>
+        <h3>Gap + Sankey Analizi</h3>
+        <p>Tasarım vs ölçüm KPI sapmaları (🟢/🟡/🔴), kök neden ipuçları; SVG Sankey ile faydalı + 6 kayıp dalı.</p>
       </div>
     </div>
   </div>
@@ -78,85 +78,55 @@
 <section class="bg-soft">
   <div class="container">
     <div class="section-header">
-      <h2>Modül Detayları</h2>
-      <p>coalpower yazılımını oluşturan tüm modüller ve görevleri.</p>
+      <h2>12 Modül Sekmesi</h2>
+      <p>coalpower yazılımındaki tüm sekmeler ve kapsamı.</p>
     </div>
     <table class="module-table">
       <thead>
-        <tr>
-          <th>#</th>
-          <th>Modül</th>
-          <th>Dosya</th>
-          <th>Ne Yapar</th>
-          <th>Kullanım</th>
-        </tr>
+        <tr><th>#</th><th>Sekme</th><th>Kapsam</th><th>Standart / Yöntem</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td><strong>IAPWS-IF97 Buhar Tabloları</strong></td>
-          <td><code>steam.js</code></td>
-          <td>enthalpy(p,T), entropy(p,T), isentropicEnthalpy — 34+43 katsayılı tam uygulama</td>
-          <td>Her türlü kazan/türbin hesabı</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td><strong>Kazan Verimi</strong></td>
-          <td><code>calculations.js</code></td>
-          <td>6 kayıp bileşenli kazan verimi, NCV ölçekleme, stokiyometri (Indirect/Direct)</td>
-          <td>Herhangi bir kömür kazanı</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td><strong>Türbin İzentropik Analiz</strong></td>
-          <td><code>calculations.js</code></td>
-          <td>HP/IP kasa η, akış dengesi, ST_Q, GRHR</td>
-          <td>Her buhar türbin</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td><strong>Kömür NCV Hesaplayıcı</strong></td>
-          <td><code>calculations.js</code></td>
-          <td>Dulong: HHV = 337C + 1419(H-O/8) + 93S → LHV</td>
-          <td>Kömür karakterizasyonu</td>
-        </tr>
-        <tr>
-          <td>5</td>
-          <td><strong>Ekonomik + Emisyon</strong></td>
-          <td><code>computeEconomics</code></td>
-          <td>TL/MWh, CO₂/SO₂/NOx/toz — g/kWh ve ton/yıl</td>
-          <td>Santral ekonomisi</td>
-        </tr>
-        <tr>
-          <td>13</td>
-          <td><strong>Sankey Diyagramı</strong></td>
-          <td><code>views/flow.ejs</code></td>
-          <td>Enerji akışı SVG — node + flow, renkli</td>
-          <td>Akış görselleştirme</td>
-        </tr>
-        <tr>
-          <td>14</td>
-          <td><strong>Line Chart (Trendler)</strong></td>
-          <td><code>views/trends.ejs</code></td>
-          <td>Zaman serisi SVG, 9 KPI</td>
-          <td>Trend izleme</td>
-        </tr>
-        <tr>
-          <td>15</td>
-          <td><strong>Gauge + Pie + Sigma-Bar</strong></td>
-          <td><code>views/summary.ejs</code></td>
-          <td>KPI kartları, donut, % gösterici</td>
-          <td>Özet panel</td>
-        </tr>
-        <tr>
-          <td>16</td>
-          <td><strong>Print-Optimize Rapor</strong></td>
-          <td><code>views/report.ejs</code></td>
-          <td>A4, 6 sayfalık, @media print</td>
-          <td>Yönetim raporu</td>
-        </tr>
+        <tr><td>1</td><td><strong>Veri Girişi</strong></td><td>7 bölümlü form: Ana buhar, Reheater, Cold reheat, HP7 ısıtıcı, Kondensat, Kazan/Yakıt, Ultimat analiz</td><td>Plant config bayrakları</td></tr>
+        <tr><td>2</td><td><strong>Aşama 1 — Q_useful</strong></td><td>IAPWS buhar entalpi (Main Steam + Reheat), m_steam × Δh</td><td>IAPWS-IF97 R1, R2, R4</td></tr>
+        <tr><td>3</td><td><strong>Aşama 2 — Total Heat</strong></td><td>Yakıt enerji girdisi: m_fuel × HHV (kuru/AR/DAF dönüşüm)</td><td>Dulong / Boie / Channiwala</td></tr>
+        <tr><td>4</td><td><strong>Aşama 3 — PTC 4 Losses</strong></td><td>Kuru baca, H₂O, UBC (yanmamış karbon), radyasyon, manuel kayıplar</td><td>ASME PTC 4 dolaylı yöntem</td></tr>
+        <tr><td>5</td><td><strong>Aşama 4 — Verim</strong></td><td>η_HHV ve η_LHV (direkt + dolaylı), η = 100 − ΣL</td><td>%, kJ/kg yakıt</td></tr>
+        <tr><td>6</td><td><strong>Aşama 5 — Türbin</strong></td><td>HP/IP/LP izentropik genişleme, iç verim, GRHR / NHR (kJ/kWh, kcal/kWh)</td><td>Mollier h-s diyagramı</td></tr>
+        <tr><td>7</td><td><strong>Özet (KPI)</strong></td><td>Q_useful, η, MW brüt/net, yıllık elektrik / kömür / CO₂</td><td>Yönetim panosu</td></tr>
+        <tr><td>8</td><td><strong>Ekonomi</strong></td><td>Yakıt / elektrik / CO₂ maliyeti (TL/MWh, USD/MWh), yıllık nakit akış</td><td>WACC + senaryo karşılaştırma</td></tr>
+        <tr><td>9</td><td><strong>Karbon (ETS + CBAM)</strong></td><td>CO₂ EF (kg/kWh), EU ETS / TR ETS / CBAM ödeme, spesifik emisyon</td><td>IPCC Tier 1/2</td></tr>
+        <tr><td>10</td><td><strong>Su</strong></td><td>Soğutma kulesi (yaş/kuru/once-through), FGD, kül, servis suyu (m³/MWh)</td><td>CoC, intensite</td></tr>
+        <tr><td>11</td><td><strong>Sankey</strong></td><td>SVG enerji akışı: faydalı % + 6 kayıp dalı (kuru baca, H₂O, UBC, radyasyon, türbin, kondenser)</td><td>Node + flow renkli</td></tr>
+        <tr><td>12</td><td><strong>Gap Analysis</strong></td><td>Tasarım vs ölçüm KPI sapma (%, Δ); status renk kodu, kök neden ipuçları</td><td>Tasarım hedef değerleri</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-header">
+      <h2>Yardımcı Modüller</h2>
+      <p>coalpower içinde 25+ ek modül ile yakıt biliminden yanma, emisyon, operasyonel izleme ve AI tahminine kadar geniş kapsam.</p>
+    </div>
+    <div class="grid-4">
+      <div class="module-chip"><strong>Fuel Analysis</strong><span>Proximate / Ultimate, AR↔Dry↔DAF</span></div>
+      <div class="module-chip"><strong>Combustion</strong><span>Stokiyometrik hava + adyabatik T</span></div>
+      <div class="module-chip"><strong>Air Heater</strong><span>Leakage, X-Ratio, effectiveness</span></div>
+      <div class="module-chip"><strong>Heat Rate</strong><span>GHR / NHR brüt-net</span></div>
+      <div class="module-chip"><strong>Mill / Pulverizer</strong><span>HGI, mesh %, PA debisi</span></div>
+      <div class="module-chip"><strong>Furnace HRR</strong><span>Volumetrik / cross-section</span></div>
+      <div class="module-chip"><strong>O₂ Trim</strong><span>Excess air sweep, CO/NOx tradeoff</span></div>
+      <div class="module-chip"><strong>FGD</strong><span>Yaş kireçtaşı/kireç + gypsum</span></div>
+      <div class="module-chip"><strong>DeNOx</strong><span>SCR / SNCR, NH₃ tüketim</span></div>
+      <div class="module-chip"><strong>ESP</strong><span>Deutsch-Anderson, dP, A/C</span></div>
+      <div class="module-chip"><strong>Trace Metals</strong><span>Hg, As, Se, Cd, Pb partisyon</span></div>
+      <div class="module-chip"><strong>Slagging / Fouling</strong><span>B/A, Rs, Rf, Cl, T250</span></div>
+      <div class="module-chip"><strong>Ash Fusion</strong><span>IDT/ST/HT/FT, Watt-Fereday</span></div>
+      <div class="module-chip"><strong>Drying</strong><span>WTA / akışkan yatak ROI</span></div>
+      <div class="module-chip"><strong>PG Test</strong><span>Garanti vs ölçüm penaltı</span></div>
+      <div class="module-chip"><strong>AI Prediction</strong><span>Ridge + k-NN regresyon</span></div>
+    </div>
   </div>
 </section>
 
@@ -209,6 +179,7 @@
         <li><a href="coalpower.html">coalpower</a></li>
         <li><a href="geopower.html">geopower</a></li>
         <li><a href="biopower.html">biopower</a></li>
+        <li><a href="windpower.html">windpower</a></li>
         <li><a href="solarpower.html">solarpower</a></li>
       </ul>
     </div>

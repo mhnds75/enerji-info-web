@@ -31,6 +31,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://enerjiinfoweb.vercel.app/windpower</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://enerjiinfoweb.vercel.app/solarpower</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

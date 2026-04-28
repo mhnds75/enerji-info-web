@@ -53,23 +53,23 @@
   <div class="container">
     <div class="section-header">
       <h2>Genel Bakış</h2>
-      <p>biopower, biyokütle yakıtlı Rankine çevrimli santrallerden anaerobik çürütücülere, YEKDEM gibi teşvik mekanizmalarından AB ETS gelir hesabına kadar geniş bir yelpazeyi tek bir modüler yazılımda sunar.</p>
+      <p>biopower, biyokütle yakıtlı Rankine + CHP santrallerinden anaerobik biyogaz tesislerine, BS 845 kazan veriminden BECCS karbon yakalamaya kadar 17 sekme ile yakıt biliminden işletme ekonomisine geniş kapsam sunar.</p>
     </div>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">🌱</div>
-        <h3>Yakıt Esnekliği</h3>
-        <p>10 biyokütle yakıt preset'i — odun talaşı, pirina, fındık kabuğu, buğday samanı ve fazlası.</p>
+        <h3>BS 845 + Direct/Indirect</h3>
+        <p>BS 845 / IS 8753 kazan verimi (direkt + dolaylı yöntem), adyabatik alev sıcaklığı, 5 yakıt blend (co-firing).</p>
       </div>
       <div class="card">
         <div class="card-icon">💰</div>
-        <h3>Finansal Modelleme</h3>
-        <p>YEKDEM, YEKA-Bio ve FiT preset'leri + AB ETS — NPV, IRR ve duyarlılık analizleri.</p>
+        <h3>YEKDEM + ETS</h3>
+        <p>YEKDEM, YEKA-Bio, FiT preset'leri + AB ETS gelir hesabı. Biyojenik CO₂ tarafsızlığı dikkate alınır.</p>
       </div>
       <div class="card">
-        <div class="card-icon">🧪</div>
-        <h3>Kül Kimyası</h3>
-        <p>B/A, Rs, Rf, AI, Rsil, BAI indeksleri ile curuflaşma ve kirlenme risklerini öngörün.</p>
+        <div class="card-icon">🔬</div>
+        <h3>Boyle-Buswell + BECCS</h3>
+        <p>Boyle/Buswell BMP biyogaz, anaerobik sindirim boyutlandırma; BECCS karbon yakalama senaryoları.</p>
       </div>
     </div>
   </div>
@@ -78,58 +78,31 @@
 <section class="bg-soft">
   <div class="container">
     <div class="section-header">
-      <h2>Modül Detayları</h2>
-      <p>biopower yazılımındaki tüm modüller ve işlevleri.</p>
+      <h2>17 Modül Sekmesi</h2>
+      <p>biopower yazılımındaki tüm sekmeler ve kapsamı.</p>
     </div>
     <table class="module-table">
       <thead>
-        <tr>
-          <th>Modül</th>
-          <th>Ne Yapar</th>
-          <th>Standalone Kullanım</th>
-        </tr>
+        <tr><th>#</th><th>Sekme</th><th>Kapsam</th><th>Standart / Yöntem</th></tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>steam.js</strong><br><small>IAPWS-IF97 + Rankine</small></td>
-          <td><code>BP.steam.Psat_bar(T)</code>, <code>Tsat_C(P)</code>, <code>h_f_T</code>, <code>h_g_T</code>, <code>h_superheat(P,T)</code>, <code>rankineCycle(...)</code></td>
-          <td>Herhangi bir termal santral, HVAC veya kazan yazılımı</td>
-        </tr>
-        <tr>
-          <td><strong>ash.js</strong><br><small>Kül kimyası & curuflaşma</small></td>
-          <td><code>BP.ash.computeIndices(ash_oxides, fuel)</code> → B/A, Rs, Rf, AI, Rsil, BAI + sınıflandırma. 9 önayar külle birlikte.</td>
-          <td>Kömür/biyokütle yakıt analiz araçları</td>
-        </tr>
-        <tr>
-          <td><strong>biogas.js</strong><br><small>BMP & anaerobik çürütücü</small></td>
-          <td><code>theoreticalBMP(C,H,O,N)</code> Boyle/Buswell; <code>sizeDigester(...)</code> HRT/OLR boyutlandırma. 10 feedstock preset, CHP motor entegrasyonu.</td>
-          <td>Biyogaz tesisi fizibilite araçları</td>
-        </tr>
-        <tr>
-          <td><strong>tariff.js</strong><br><small>Destek mekanizmaları</small></td>
-          <td><code>buildTariffSchedule(...)</code>, <code>etsRevenue(...)</code>, <code>advancedEconomics(...)</code>, <code>npvVariable</code>, <code>irrVariable</code>. YEKDEM, YEKA-Bio, FiT preset'leri + AB ETS.</td>
-          <td>Her yenilenebilir enerji projesi (güneş, rüzgâr, vs.)</td>
-        </tr>
-        <tr>
-          <td><strong>sankey.js</strong><br><small>Pure SVG Sankey renderer</small></td>
-          <td><code>renderSankey(container, {nodes, links})</code> — d3 yok, dış bağımlılık yok</td>
-          <td>Herhangi bir akış (enerji, para, süreç) görselleştirmesi</td>
-        </tr>
-        <tr>
-          <td><strong>i18n.js</strong><br><small>Hafif çeviri katmanı</small></td>
-          <td><code>data-i18n="key"</code> HTML öznitelikleri + <code>setLang()</code>, <code>apply()</code>, <code>t(key)</code></td>
-          <td>Framework bağımsız, her projeye entegre</td>
-        </tr>
-        <tr>
-          <td><strong>montecarlo.js</strong><br><small>Duyarlılık motoru</small></td>
-          <td><code>sample(dist_spec)</code>, <code>runMonteCarlo(...)</code>, <code>runTornado(...)</code>. Normal/Triangular/Uniform/Lognormal.</td>
-          <td>Her parametrik model — <code>runFullAnalysis</code> pipeline'ınıza bağlanır</td>
-        </tr>
-        <tr>
-          <td><strong>fuels.js</strong><br><small>10 biyokütle yakıt preset</small></td>
-          <td>Saf veri — yakıt özellikleri, elementel analiz, kül içeriği</td>
-          <td>Herhangi bir yakıt kütüphanesine import</td>
-        </tr>
+        <tr><td>1</td><td><strong>Yakıt Karakterizasyonu</strong></td><td>HHV/LHV (Dulong vs Channiwala), proximate + ultimate, 10+ preset</td><td>AR ↔ Dry ↔ DAF dönüşüm</td></tr>
+        <tr><td>2</td><td><strong>Co-firing (Harmanlama)</strong></td><td>5 yakıta kadar blend (enerji + kütle bazında), biyojenik CO₂ payı</td><td>Weighted HHV/LHV</td></tr>
+        <tr><td>3</td><td><strong>Kazan (BS 845)</strong></td><td>Doğrudan + dolaylı kazan verimi, 6 kayıp bileşeni</td><td>BS 845 / IS 8753</td></tr>
+        <tr><td>4</td><td><strong>Adyabatik Alev T</strong></td><td>Stokiyometrik hava + adyabatik alev sıcaklığı yaklaşımı</td><td>EU IED uyumluluk</td></tr>
+        <tr><td>5</td><td><strong>Rankine Çevrimi</strong></td><td>Kapalı döngü turbin (MS, LRH, kondenser), izentropik verim</td><td>IAPWS-IF97 R1, R2, R4</td></tr>
+        <tr><td>6</td><td><strong>CHP / EUF</strong></td><td>Kombine ısı-güç; siklus + mekanik verim, EUF, PES</td><td>AB 2012/27 yönergesi</td></tr>
+        <tr><td>7</td><td><strong>Emisyon</strong></td><td>CO₂ / SO₂ / NOx / CO / PM / CH₄ / N₂O, GWP₁₀₀</td><td>IPCC Tier 1/2</td></tr>
+        <tr><td>8</td><td><strong>Ekonomi</strong></td><td>LCOE, NPV, IRR (bisection), geri ödeme dönemi</td><td>WACC + senaryo</td></tr>
+        <tr><td>9</td><td><strong>Kül İndeksleri</strong></td><td>B/A, Rs (slagging), Rf (fouling), alkali/silika, BAI</td><td>9 preset kül analizi</td></tr>
+        <tr><td>10</td><td><strong>Biyogaz (BMP)</strong></td><td>Boyle/Buswell teorik BMP, anaerobik sindirim, HRT/OLR boyutlandırma</td><td>10 feedstock preset</td></tr>
+        <tr><td>11</td><td><strong>BECCS</strong></td><td>Bio-Energy + Carbon Capture &amp; Storage senaryoları</td><td>Biyojenik negatif emisyon</td></tr>
+        <tr><td>12</td><td><strong>Tarife (YEKDEM)</strong></td><td>YEKDEM / YEKA-Bio / FiT / EU ETS gelir motoru</td><td>USD/TRY döviz duyarlılığı</td></tr>
+        <tr><td>13</td><td><strong>Sankey</strong></td><td>SVG enerji dengesi, faydalı + kayıp dalları</td><td>Pure SVG (d3 yok)</td></tr>
+        <tr><td>14</td><td><strong>Senaryo Karşılaştırma</strong></td><td>Yakıt seçimi: maliyet vs emisyon vs verim matrisi</td><td>Yan yana KPI tablosu</td></tr>
+        <tr><td>15</td><td><strong>Monte Carlo + Tornado</strong></td><td>LCOE belirsizlik dağılımı (Normal/Triangular/Uniform/Lognormal)</td><td>10,000 senaryo, P50/P90</td></tr>
+        <tr><td>16</td><td><strong>8760 Saatlik Profil</strong></td><td>Yıllık saatlik yük eğrisi, kullanılabilirlik, dispatch</td><td>Saatlik üretim simülasyonu</td></tr>
+        <tr><td>17</td><td><strong>Özet (KPI)</strong></td><td>Verim, MW, yıllık enerji, LCOE, CO₂ avoid, NPV</td><td>Yönetim panosu</td></tr>
       </tbody>
     </table>
   </div>
@@ -184,6 +157,7 @@
         <li><a href="coalpower.html">coalpower</a></li>
         <li><a href="geopower.html">geopower</a></li>
         <li><a href="biopower.html">biopower</a></li>
+        <li><a href="windpower.html">windpower</a></li>
         <li><a href="solarpower.html">solarpower</a></li>
       </ul>
     </div>
